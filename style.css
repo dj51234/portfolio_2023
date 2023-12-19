@@ -315,11 +315,10 @@ body {
     display: inline-flex;
     border-radius: 7px;
     text-decoration: none;
-    background-color: #13b5ce;
+    background-color: #2ad2ec;
     padding: 1.2rem 1.5rem;
     font-weight: 700;
-    color: white;
-    margin-top: 5rem;
+    color: black;
     position: relative;
 }
 .header__resume:hover::before{
@@ -339,6 +338,46 @@ body {
     z-index: -1;
     filter: blur(30px);
     transform: translate(-50%, -50%);
+}
+.social-icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 375px;
+    margin-top: 5rem;
+}
+.social-icons a:not(a:first-of-type) {
+    color: #fff;
+    display: inline-block;
+    position: relative;
+}
+.social-icons i {
+    font-size: 38px;
+    transition: .2s ease-in-out;
+    transform: translate(0,0);
+}
+.social-icons a:not(a:first-of-type)::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #2ad2ec;
+    display: inline-block;
+    z-index: -1;
+    filter: blur(20px);
+    opacity: 0;
+    transition: .2s ease-in-out;
+}
+.social-icons a:not(a:first-of-type):hover::after   {
+    opacity: 1;
+}
+.social-icons a:not(a:first-of-type):hover i   {
+    transform: translate(0,-5px)
+}
+.social-icons a:nth-of-type(2) {
+    margin-left: 20px;
 }
 
 /*
@@ -575,15 +614,16 @@ body {
     width: 100%;
     position: relative;
     color: #111;
+    transform-origin: center;
 }
 .contact__submit-btn:hover::before{
-    transform: scale(0.3);
+    transform: scale(0.7);
 }
 .contact__submit-btn::before{
     content: '';
     position: absolute;
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     background-color: #20e1ff;
     filter: blur(150px);
     left: 0;
@@ -719,7 +759,7 @@ body {
 @media only screen and (min-width: 62.5em) {
     .header__right{
         width: 500px;
-        opacity: .8;
+        opacity: .9;
         right: -20px;
     }
 }
