@@ -109,8 +109,11 @@ SERVICE_BOXES.forEach(service => {
     moveBG(e.clientX, e.clientY);
   });
   service.addEventListener('mousemove', (e) => {
-    const LEFT = e.clientX - service.getBoundingClientRect().left;
-    const TOP = e.clientY - service.getBoundingClientRect().top;
+    const rect = service.getBoundingClientRect();
+    const bgRect = currentServiceBG.getBoundingClientRect();
+
+    const LEFT = e.clientX - rect.left - bgRect.width / 2;
+    const TOP = e.clientY - rect.top - bgRect.height / 2;
     moveBG(LEFT, TOP);
   });
   service.addEventListener('mouseleave', () => {
@@ -129,3 +132,46 @@ new SweetScroll({
   easing: 'easeOutQuint',
   offset: NAV_BAR.getBoundingClientRect().height - 80
 });
+
+// Mouse Movements Hero Section
+function mouseMove() {
+  const hero = document.querySelector('.header__container')
+  const mouse = document.querySelector('#mouse-blur')
+  const rect = hero.getBoundingClientRect()
+  
+  hero.addEventListener('mousemove', (e) => {
+    let x = e.clientX - rect.left - mouse.offsetWidth / 2
+    let y = e.clientY - rect.top - mouse.offsetHeight / 2
+    let hoveredElement = document.elementFromPoint(e.clientX, e.clientY);
+
+    if (hoveredElement.matches('i, a.header__resume')) {
+      mouse.style.opacity = 0
+      mouse.style.zIndex = 0
+    }
+    else {
+      mouse.style.opacity = 1
+      mouse.style.zIndex = 1
+     }
+
+    mouse.style.left = `${x}px`
+    mouse.style.top = `${y}px`
+    
+  })
+
+  hero.addEventListener('click', (e) => {
+    let hoveredElement = document.elementFromPoint(e.clientX, e.clientY);
+    const chunkDiv = document.createElement('div');
+
+    chunkDiv.className = 'chunk-effect'; // Add a class for styling
+    chunkDiv.style.width = '50px'; // Match the blur div's width
+    chunkDiv.style.height = '50px'; // Match the blur div's height
+    chunkDiv.style.left = `${e.clientX - 25}px`; // Center the chunk
+    chunkDiv.style.top = `${e.clientY - 25}px`; // Center the chunk
+
+    if (!hoveredElement.matches('i, a.header__resume')) {
+      document.body.appendChild(chunkDiv); // Append the chunk to the body or the hero section
+    }
+  });
+}
+
+mouseMove()
