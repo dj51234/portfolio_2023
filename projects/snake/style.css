@@ -1,0 +1,157 @@
+:root {
+    font-size: 62.5%;
+    --snake-start-x: 50vw;
+    --snake-start-y: 25vh;
+}
+
+html, body, * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    height: 100vh;
+    width: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+    border: 3px solid #fff;
+    font-family: 'Press Start 2P', monospace;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(270deg, #000, #111, #000, #111);
+    background-size: 400% 400%; 
+    animation: movingGradient 25s linear infinite;
+}
+
+.start-game {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .5s ease-in-out;
+    position: absolute;
+    inset: 0;
+}
+
+.play-text-animation {
+    animation: playGame 1.5s ease-in-out 0ms infinite;
+}
+
+.volume-control {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    font-size: 24px; /* Adjust size as needed */
+}
+
+.start-game h1 {
+    cursor: pointer;
+    padding: 2.5rem;
+    border: 2px solid #fff;
+    border-radius: 2rem;
+    transition: .2s ease-in-out;
+    font-size: 4rem;
+}
+
+.start-game h1:hover {
+    color: #000;
+    background-color: #fff;
+}
+
+.title {
+    height: 100%;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(0);
+    transition: opacity 1s ease-in-out, transform .3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.rotate {
+    transform: rotate(-5deg);
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.title h1:hover .title {
+    transform: rotate(-5deg); /* Slight rotation on hover */
+    transition: transform 0.3s ease;
+}
+
+.title h1 {
+    font-size: 9rem;
+    text-transform: uppercase;
+}
+
+.title p {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.title p span {
+    color: rgb(115, 255, 0);
+}
+
+.title h1 span, 
+.title p {
+    transition: opacity .2s ease-in-out;
+    opacity: 0;
+}
+
+.title h1 span.typewriter, 
+.title p.typewriter {
+    opacity: 1;
+}
+
+.main-menu {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.7rem;
+    gap: 1.5rem;
+}
+
+.snake-segments {
+    position: absolute;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.snake-segment {
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    margin: 2px;
+}
+
+@keyframes playGame {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes movingGradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
