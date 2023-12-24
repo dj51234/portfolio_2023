@@ -1,4 +1,7 @@
 import vars from "./vars.js";
+import { gameLoop, handleKeyPress, setCanvasSize } from "./game.js";
+// import { testDraw } from './game.js';
+window.onload = setCanvasSize;
 
 vars.$volumeIcon.style.display = 'none';
 
@@ -53,5 +56,24 @@ vars.$volumeIcon.addEventListener('click', () => {
     vars.$gameAudio.muted = !vars.$gameAudio.muted;
     vars.$volumeIcon.textContent = vars.$gameAudio.muted ? '\u{1F507}' : '\u{1F50A}'; // Change icon based on mute state
 });
+
+vars.$canvasStart.addEventListener('click', () => {
+    setTimeout(() => {
+        vars.$title.classList.remove('visible')
+        setTimeout(() => {
+            vars.$canvas.classList.add('visible')
+        }, 500);
+    }, 500);
+    vars.$gameAudio.src = 'assets/snake-audio.mp3'
+    setTimeout(() => {
+        vars.$gameAudio.play()
+        vars.ctx = vars.$canvas.getContext('2d')
+        document.addEventListener('keydown', handleKeyPress);
+        requestAnimationFrame(gameLoop);
+        vars.$body.style.background = 'linear-gradient(0, #000, #000, #000, #000)'
+    }, 1300);
+})
+
+
 
 
