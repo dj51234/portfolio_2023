@@ -1,9 +1,29 @@
 import vars from "./vars.js";
-import { gameLoop, handleKeyPress, setCanvasSize } from "./game.js";
-// import { testDraw } from './game.js';
-window.onload = setCanvasSize;
+import { gameLoop, handleKeyPress, setCanvasSize, restartGame } from "./game.js";
+
+window.onload = setCanvasSize
 
 vars.$volumeIcon.style.display = 'none';
+
+function startGameFromMainMenu() {
+    vars.$canvasStart.click(); // Programmatically trigger the click event
+    vars.isMainMenuActive = false
+}
+
+function startGameFromGameOver() {
+    vars.$restartButton.click(); // Programmatically trigger the click event
+    vars.isRestartMenuActive = false
+}
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' && vars.isMainMenuActive) { // Assuming isMainMenuActive is a flag in vars.js
+        startGameFromMainMenu();
+    }
+    if (event.key === 'Enter' && vars.isRestartMenuActive) { // Assuming isMainMenuActive is a flag in vars.js
+        startGameFromGameOver();
+    }
+});
+
 
 // start game
 vars.$playSnakeText.addEventListener('mouseenter', () => {
@@ -22,7 +42,7 @@ vars.$playSnakeText.addEventListener('click', () => {
     vars.$playDiv.style.opacity = 0
     setTimeout(() => {
         vars.$playDiv.style.visibility = 'hidden' 
-    }, 500);
+    }, 500)
 
     // animate title div into page
     setTimeout(() => {
@@ -34,7 +54,7 @@ vars.$playSnakeText.addEventListener('click', () => {
         vars.$titleSpan.forEach(span => {
             setTimeout(() => {
                 span.classList.add('typewriter') 
-            }, delay);   
+            }, delay)
             delay += 500
         })
 
@@ -48,7 +68,7 @@ vars.$playSnakeText.addEventListener('click', () => {
             vars.$mainMenu.classList.add('visible')
             vars.$startCanvas.classList.add('visible')
         }, delay + 500)
-
+        vars.isMainMenuActive = true
     }, 2500); 
 })
 
@@ -62,16 +82,29 @@ vars.$canvasStart.addEventListener('click', () => {
         vars.$title.classList.remove('visible')
         setTimeout(() => {
             vars.$canvas.classList.add('visible')
-        }, 500);
+        }, 500)
     }, 500);
     vars.$gameAudio.src = 'assets/snake-audio.mp3'
     setTimeout(() => {
         vars.$gameAudio.play()
         vars.ctx = vars.$canvas.getContext('2d')
-        document.addEventListener('keydown', handleKeyPress);
-        requestAnimationFrame(gameLoop);
+        document.addEventListener('keydown', handleKeyPress)
+        requestAnimationFrame(gameLoop)
         vars.$body.style.background = 'linear-gradient(0, #000, #000, #000, #000)'
     }, 1300);
+})
+
+vars.$restartButton.addEventListener('click', () => {
+    restartGame()
+    document.getElementById('gameOverScreen').style.display = 'none'
+    vars.$canvas.classList.add('visible')
+    requestAnimationFrame(gameLoop)
+    vars.$gameAudio.pause();
+    vars.$gameAudio.src = 'assets/snake-audio.mp3'
+    
+    // Play the game over audio
+    vars.$gameAudio.play()
+
 })
 
 

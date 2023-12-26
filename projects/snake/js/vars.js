@@ -17,18 +17,24 @@ const vars = {
     $canvas:  document.querySelector('.game-canvas'),
     $canvasStart:  document.querySelector('.start-canvas'),
     $gameOverAudio: document.querySelector('#gameOverSound'),
+    $restartButton: document.querySelector('#restartButton'),
+    $score: document.querySelector('#finalScore'),
+    $scoreNotification: document.querySelector('.score-notification'),
     
     // GAME VARS //
     ctx: null,
+    isMainMenuActive: false,
+    isRestartMenuActive: false,
 
     //snake vars
     snake: [
         { x: 400, y: 100 },
     ],
-    SNAKE_SPEED: 5,
+    SNAKE_SPEED: 6,
     SNAKE_SIZE: SNAKE_SIZE,
     directionX: SNAKE_SIZE,
     directionY: 0,
+    score: 100,
 
 }
 
