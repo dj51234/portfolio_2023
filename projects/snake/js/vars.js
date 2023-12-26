@@ -30,7 +30,7 @@ const vars = {
     snake: [
         { x: 400, y: 100 },
     ],
-    SNAKE_SPEED: 6,
+    SNAKE_SPEED: 5,
     SNAKE_SIZE: SNAKE_SIZE,
     directionX: SNAKE_SIZE,
     directionY: 0,
