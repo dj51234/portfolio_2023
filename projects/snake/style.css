@@ -144,13 +144,22 @@ body {
     transition: all .3s ease-in-out;
 }
 
-.visible {
-    visibility: visible;
-    opacity: 1 ;
-}
 
 .play-text-animation {
     animation: playGame 1.5s ease-in-out 0ms infinite;
+}
+
+.speed-indicator {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
 }
 
 #gameOverScreen {
@@ -188,6 +197,11 @@ body {
     transition: .2s ease-in-out;
     font-size: 2rem;
     font-family: 'Press Start 2P', monospace;
+}
+
+.visible {
+    visibility: visible;
+    opacity: 1 ;
 }
 
 @keyframes playGame {

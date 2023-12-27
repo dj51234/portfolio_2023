@@ -35,20 +35,34 @@ function moveSnake() {
     }
 }
 
+function moveSnakeDiscrete() {
+    const steps = Math.round(vars.SNAKE_SPEED / 10); // Adjust the number of steps based on speed
+
+    for (let i = 0; i < steps; i++) {
+        moveSnake(); // Move the snake one grid cell at a time
+        drawSnake(); // Redraw the snake after each move
+    }
+}
+
 function gameLoop(currentTime) {
+    if (gameOverShown) {
+        return; // Stop the game loop if game over is shown
+    }
+
     requestAnimationFrame(gameLoop);
     const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000
     if (secondsSinceLastRender < 1 / vars.SNAKE_SPEED) return
 
     lastRenderTime = currentTime;
+
+    moveSnakeDiscrete();
+
     if (checkCollision()) {
         showGameOverScreen()
         return
     }
-    moveSnake()
-    drawSnake()
-    drawFood()
     updateScoreDisplay()
+    drawFood()
 }
 
 function checkCollision() {
@@ -124,10 +138,8 @@ function showGameOverScreen() {
         // Pause the game audio and set its source to the game over audio
         vars.$gameAudio.pause()
         vars.$gameAudio.src = 'assets/game-over.mp3'
-        
         // Play the game over audio
         vars.$gameAudio.play()
-
         // Display the game over screen
         document.getElementById('gameOverScreen').style.display = 'flex'
         // enable Enter key event listener
@@ -142,12 +154,10 @@ function updateScoreDisplay() {
         case (1000):
             vars.score += 100
             vars.SNAKE_SPEED+=1
-            console.log(vars.SNAKE_SPEED)
             break
         case (2000):
             vars.score += 100
-            vars.SNAKE_SPEED+=2
-            console.log(vars.SNAKE_SPEED)
+            vars.SNAKE_SPEED+=1
             break
         case (3000):
             vars.score += 100
@@ -155,7 +165,7 @@ function updateScoreDisplay() {
             break
         case (4000):
             vars.score += 100
-            vars.SNAKE_SPEED+=2
+            vars.SNAKE_SPEED+=1
             break
         case (5000):
             vars.score += 100
@@ -172,6 +182,7 @@ function restartGame() {
     gameOverShown = false // Reset game over flag
     vars.isRestartMenuActive = false // for enter event listener flag
     vars.SNAKE_SPEED = 6 // reset snake speed
+    requestAnimationFrame(gameLoop)
     
 }
 

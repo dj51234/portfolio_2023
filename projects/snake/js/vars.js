@@ -20,6 +20,7 @@ const vars = {
     $restartButton: document.querySelector('#restartButton'),
     $score: document.querySelector('#finalScore'),
     $scoreNotification: document.querySelector('.score-notification'),
+    $speedIndicator: document.querySelector('.speed-indicator'),
     
     // GAME VARS //
     ctx: null,
@@ -30,11 +31,11 @@ const vars = {
     snake: [
         { x: 400, y: 100 },
     ],
-    SNAKE_SPEED: 5,
+    SNAKE_SPEED: 6,
     SNAKE_SIZE: SNAKE_SIZE,
     directionX: SNAKE_SIZE,
     directionY: 0,
-    score: 100,
+    score: 0,
 
 }
 
