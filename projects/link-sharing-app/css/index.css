@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'Instrument Sans Bold';
+    src: url('../assets/fonts/static/InstrumentSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Instrument Sans Regular';
+    src: url('../assets/fonts/static/InstrumentSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+:root {
+    --color-primary: #633CFF;
+    --color-secondary: #BEADFF;
+    --color-tertiary: #EFEBFF;
+    --color-dark: #333333;
+    --color-gray: #737373;
+    --color-light-gray: #D9D9D9;
+    --color-extra-light-gray: #FAFAFA;
+    --color-white: #FFFFFF;
+    --color-error: #FF3939;
+    --font-family-bold: 'Instrument Sans Bold';
+    --font-family-regular: 'Instrument Sans Regular';
+    --font-size-m: 32px;
+    --font-size-s: 16px;
+    --line-height: 150%;
+
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: var(--color-primary);
+    font-family: var(--font-family-regular);
+}
+
+
+
